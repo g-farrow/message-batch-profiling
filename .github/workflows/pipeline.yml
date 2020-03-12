@@ -19,6 +19,7 @@ jobs:
         npm install -g serverless
         npm install
         sls deploy --region eu-west-1 --stage dev
+        apt-get install python3-setuptools
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
