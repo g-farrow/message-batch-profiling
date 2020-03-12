@@ -1,6 +1,6 @@
 from uuid import uuid4
 from faker import Faker
-from json import loads
+from json import dumps
 
 fake = Faker()
 
@@ -12,4 +12,4 @@ class Message:
         self.name = fake.name()
         self.address = fake.address()
         self.dict = {'id': self.id, 'name': self.name, 'address': self.address}
-        self.str = loads(self.dict)
+        self.str = dumps(self.dict)
