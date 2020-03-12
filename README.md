@@ -16,3 +16,7 @@ policy you created in the previous step. _Note: the user only requires programma
   * AWS_SECRET_ACCESS_KEY
 * Create a new commit on the master branch (make a dummy change to the README for example) - this will trigger the 
 Github actions pipeline and deploy the stack.
+
+# Running the tests
+To run the tests you can use AWS Lambda's in-built "Test Events" functionality. Setup tests against each of the deployed
+Lambda Functions:
