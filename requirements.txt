@@ -1,0 +1,2 @@
+Faker==4.0.1
+boto3-batch-utils>=4.0.0

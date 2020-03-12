@@ -1,0 +1,112 @@
+service: boto3-batch-utils-test-harness
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+plugins:
+  - serverless-python-requirements
+  - serverless-iam-roles-per-function
+
+provider:
+  name: aws
+  runtime: python3.7
+  region: eu-west-1
+  stackName: ${self:service}
+
+package:
+  exclude:
+    - .github/**
+    - resources/**
+    - requirements.txt
+    - README.md
+
+functions:
+
+  BatchProfilerIndividual:
+    handler: src.batch_profiler_individual.entry_point
+    name: BatchProfilerIndividual
+    description: A lambda function to send messages individually
+    environment:
+      LOG_LEVEL: DEBUG
+    memorySize: 128
+    iamRoleStatementsName: ${self:provider.stackName}-BatchProfilerIndividual
+    iamRoleStatements:
+      - Effect: Allow
+        Sid: xray
+        Action:
+          - "xray:*"
+        Resource:
+          - "*"
+      - Effect: Allow
+        Sid: "TargetQueue"
+        Action:
+          - SQS:SendMessage
+          - SQS:GetQueueAttributes
+          - SQS:GetQueueUrl
+          - SQS:ListQueueTags
+          - SQS:ChangeMessageVisibility
+        Resource:
+          - { "Fn::GetAtt": ["TargetQueue", "Arn"] }
+
+  BatchProfilerBatch:
+    handler: src.batch_profiler_batch.entry_point
+    name: BatchProfilerIndividual
+    description: A lambda function to send messages in batches
+    environment:
+      LOG_LEVEL: DEBUG
+    memorySize: 128
+    iamRoleStatementsName: ${self:provider.stackName}-BatchProfilerBatch
+    iamRoleStatements:
+      - Effect: Allow
+        Sid: xray
+        Action:
+          - "xray:*"
+        Resource:
+          - "*"
+      - Effect: Allow
+        Sid: "TargetQueue"
+        Action:
+          - SQS:SendMessage
+          - SQS:GetQueueAttributes
+          - SQS:GetQueueUrl
+          - SQS:ListQueueTags
+          - SQS:ChangeMessageVisibility
+        Resource:
+          - { "Fn::GetAtt": ["TargetQueue", "Arn"] }
+
+  BatchProfilerBoto3BatchUtils:
+    handler: src.batch_profiler_boto3_batch_utils.entry_point
+    name: BatchProfilerBoto3BatchUtils
+    description: A lambda function to send messages using boto3-batch-utils
+    environment:
+      LOG_LEVEL: DEBUG
+      TARGET_QUEUE_NAME:
+    memorySize: 128
+    iamRoleStatementsName: ${self:provider.stackName}-BatchProfilerBoto3BatchUtils
+    iamRoleStatements:
+      - Effect: Allow
+        Sid: xray
+        Action:
+          - "xray:*"
+        Resource:
+          - "*"
+      - Effect: Allow
+        Sid: "TargetQueue"
+        Action:
+          - SQS:SendMessage
+          - SQS:GetQueueAttributes
+          - SQS:GetQueueUrl
+          - SQS:ListQueueTags
+          - SQS:ChangeMessageVisibility
+        Resource:
+          - { "Fn::GetAtt": ["TargetQueue", "Arn"] }
+
+resources:
+  Resources:
+    TargetQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        VisibilityTimeout: 30
+        DelaySeconds: 0
+        MaximumMessageSize: 262144
+        MessageRetentionPeriod: 7200
+        QueueName: ${self:provider.stackName}-TargetQueue

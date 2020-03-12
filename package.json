@@ -1,0 +1,24 @@
+{
+  "name": "message-batch-profiling",
+  "version": "1.0.0",
+  "description": "Simple system for profiling performance differences between message broadcast APIs. Accompanying code to the blog post which can be found [here](#TODO)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g-farrow/message-batch-profiling.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/g-farrow/message-batch-profiling/issues"
+  },
+  "homepage": "https://github.com/g-farrow/message-batch-profiling#readme",
+  "devDependencies": {
+    "serverless": "^1.66.0",
+    "serverless-iam-roles-per-function": "^2.0.2",
+    "serverless-python-requirements": "^5.1.0"
+  }
+}
