@@ -50,7 +50,7 @@ functions:
 
   BatchProfilerBatch:
     handler: src.batch_profiler_batch.entry_point
-    name: BatchProfilerIndividual
+    name: BatchProfilerBatch
     description: A lambda function to send messages in batches
     environment:
       LOG_LEVEL: DEBUG
