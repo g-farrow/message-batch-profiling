@@ -27,6 +27,7 @@ functions:
     description: A lambda function to send messages individually
     environment:
       LOG_LEVEL: DEBUG
+      TARGET_QUEUE_NAME: ${self:provider.stackName}-TargetQueue
     memorySize: 128
     iamRoleStatementsName: ${self:provider.stackName}-BatchProfilerIndividual
     iamRoleStatements:
@@ -53,6 +54,7 @@ functions:
     description: A lambda function to send messages in batches
     environment:
       LOG_LEVEL: DEBUG
+      TARGET_QUEUE_NAME: ${self:provider.stackName}-TargetQueue
     memorySize: 128
     iamRoleStatementsName: ${self:provider.stackName}-BatchProfilerBatch
     iamRoleStatements:
@@ -79,7 +81,7 @@ functions:
     description: A lambda function to send messages using boto3-batch-utils
     environment:
       LOG_LEVEL: DEBUG
-      TARGET_QUEUE_NAME:
+      TARGET_QUEUE_NAME: ${self:provider.stackName}-TargetQueue
     memorySize: 128
     iamRoleStatementsName: ${self:provider.stackName}-BatchProfilerBoto3BatchUtils
     iamRoleStatements:
