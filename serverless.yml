@@ -11,6 +11,8 @@ provider:
   runtime: python3.6
   region: eu-west-1
   stackName: ${self:service}
+  tracing:
+    lambda: true
 
 package:
   exclude:
