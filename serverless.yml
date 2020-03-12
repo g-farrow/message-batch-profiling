@@ -1,4 +1,4 @@
-service: boto3-batch-utils-test-harness
+service: message-batch-profiling
 
 frameworkVersion: ">=1.1.0 <2.0.0"
 
