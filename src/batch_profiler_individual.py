@@ -23,8 +23,8 @@ def initialise_client():
 def broadcast_messages(sqs_client, messages_to_send):
     queue_url = sqs_client.get_queue_url(QueueName=queue_name)['QueueUrl']
     for each in range(0, messages_to_send):
-        message = Message().dict
+        message = Message()
         sqs_client.send_message(
             QueueUrl=queue_url,
-            MessageBody=message
+            MessageBody=message.str
         )

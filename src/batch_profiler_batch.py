@@ -22,8 +22,8 @@ def initialise_client():
 
 def broadcast_messages(sqs_client, messages_to_send):
     queue_url = sqs_client.get_queue_url(QueueName=queue_name)['QueueUrl']
-    messages_list = [Message().dict for each in range(0, messages_to_send)]
+    messages_list = [Message() for each in range(0, messages_to_send)]
     sqs_client.send_message_batch(
         QueueUrl=queue_url,
-        Entries=[{'Id': message['id'], 'MessageBody': message} for message in messages_list]
+        Entries=[{'Id': message.id, 'MessageBody': message.str} for message in messages_list]
     )
