@@ -16,7 +16,7 @@ jobs:
       with:
         node-version: 12.x
     - run: |
-        apt-get install python3-setuptools
+        sudo apt-get install python3-setuptools
         npm install -g serverless
         npm install
         sls deploy --region eu-west-1 --stage dev
