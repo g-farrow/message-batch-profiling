@@ -1,3 +1,4 @@
 Faker==4.0.1
 boto3-batch-utils>=4.0.0
 aws-xray-sdk>=2.4.3
+boto3>=1.12.19

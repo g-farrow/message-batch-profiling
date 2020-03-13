@@ -17,6 +17,22 @@ policy you created in the previous step. _Note: the user only requires programma
 * Create a new commit on the master branch (make a dummy change to the README for example) - this will trigger the 
 Github actions pipeline and deploy the stack.
 
+## Resources:
+Other than the resources required for deployment, the following AWS Resources will be provisioned:
+* Lambda:
+  * BatchProfilerIndividual
+  * BatchProfilerBatch
+  * BatchProfilerBoto3BatchUtils
+* SQS Queue:
+  * message-batch-profiling-TargetQueue
+
 # Running the tests
 To run the tests you can use AWS Lambda's in-built "Test Events" functionality. Setup tests against each of the deployed
 Lambda Functions:
+```json
+{
+  "messages_to_send": 10
+}
+```
+Running this test will cause the Lambda to send the requested number of messages to the SQS queue. **Note:** A maximum 
+of 10 should be used.
