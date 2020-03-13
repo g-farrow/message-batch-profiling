@@ -15,10 +15,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - run: |
+    - name: Install Deployment Tools
+      run: |
         sudo apt-get install python3-setuptools
         npm install -g serverless
         npm install
+    - name: Deploy
+      run:
         sls deploy --region eu-west-1 --stage dev
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
