@@ -19,6 +19,7 @@ def entry_point(events, context):
 
 @xray_recorder.capture()
 def broadcast_messages(sqs_client, messages_to_send):
-    for each in range(0, messages_to_send):
-        sqs_client.submit_payload(Message().dict)
+    messages_list = [Message() for each in range(0, messages_to_send)]
+    for message in messages_list:
+        sqs_client.submit_payload(message.dict)
     sqs_client.flush_payloads()
