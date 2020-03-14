@@ -75,6 +75,12 @@
             "Resource": "arn:aws:sqs:*:*:message-batch-profiling*"
         },
         {
+            "Sid": "Kinesis",
+            "Effect": "Allow",
+            "Action": "kinesis:*",
+            "Resource": "arn:aws:kinesis:*:*:stream/<<project-name>>*"
+        },
+        {
             "Sid": "CloudwatchEvents1",
             "Effect": "Allow",
             "Action": [

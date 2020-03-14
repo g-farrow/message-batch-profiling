@@ -29,9 +29,11 @@ Other than the resources required for deployment, the following AWS Resources wi
 # Running the tests
 To run the tests you can use AWS Lambda's in-built "Test Events" functionality. Setup tests against each of the deployed
 Lambda Functions:
-```json
+```python
 {
-  "messages_to_send": 10
+  "messages_to_send": 10,
+  "sqs": True,
+  "kinesis": False
 }
 ```
 Running this test will cause the Lambda to send the requested number of messages to the SQS queue. **Note:** A maximum 
