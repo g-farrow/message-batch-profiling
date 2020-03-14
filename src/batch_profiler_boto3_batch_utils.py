@@ -15,9 +15,9 @@ def entry_point(events, context):
     messages_to_send = events['messages_to_send']
     logger.info(f"Running profile with {messages_to_send} messages")
     messages_list = [Message() for each in range(0, messages_to_send)]
-    if events['sqs'] and messages_to_send <= 10:
+    if events['sqs'].upper() == "TRUE" and messages_to_send <= 10:
         broadcast_messages_sqs(messages_list)
-    if events['kinesis']:
+    if events['kinesis'].upper() == "TRUE":
         broadcast_messages_kinesis(messages_list)
     logger.info("Invocation complete, ending")
 
