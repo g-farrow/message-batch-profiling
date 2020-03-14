@@ -50,6 +50,12 @@ functions:
           - SQS:ChangeMessageVisibility
         Resource:
           - { "Fn::GetAtt": ["TargetQueue", "Arn"] }
+      - Effect: Allow
+        Sid: "TargetStream"
+        Action:
+          - kinesis:PutRecord
+        Resource:
+          - { "Fn::GetAtt": ["TargetKinesis", "Arn"] }
 
   BatchProfilerBatch:
     handler: src.batch_profiler_batch.entry_point
@@ -78,6 +84,12 @@ functions:
           - SQS:ChangeMessageVisibility
         Resource:
           - { "Fn::GetAtt": ["TargetQueue", "Arn"] }
+      - Effect: Allow
+        Sid: "TargetStream"
+        Action:
+          - kinesis:PutRecords
+        Resource:
+          - { "Fn::GetAtt": ["TargetKinesis", "Arn"] }
 
   BatchProfilerBoto3BatchUtils:
     handler: src.batch_profiler_boto3_batch_utils.entry_point
@@ -106,6 +118,13 @@ functions:
           - SQS:ChangeMessageVisibility
         Resource:
           - { "Fn::GetAtt": ["TargetQueue", "Arn"] }
+      - Effect: Allow
+        Sid: "TargetStream"
+        Action:
+          - kinesis:PutRecord
+          - kinesis:PutRecords
+        Resource:
+          - { "Fn::GetAtt": ["TargetKinesis", "Arn"] }
 
 resources:
   Resources:
