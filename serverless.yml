@@ -55,7 +55,7 @@ functions:
         Action:
           - kinesis:PutRecord
         Resource:
-          - { "Fn::GetAtt": ["TargetKinesis", "Arn"] }
+          - { "Fn::GetAtt": ["TargetKinesisStream", "Arn"] }
 
   BatchProfilerBatch:
     handler: src.batch_profiler_batch.entry_point
@@ -89,7 +89,7 @@ functions:
         Action:
           - kinesis:PutRecords
         Resource:
-          - { "Fn::GetAtt": ["TargetKinesis", "Arn"] }
+          - { "Fn::GetAtt": ["TargetKinesisStream", "Arn"] }
 
   BatchProfilerBoto3BatchUtils:
     handler: src.batch_profiler_boto3_batch_utils.entry_point
@@ -124,7 +124,7 @@ functions:
           - kinesis:PutRecord
           - kinesis:PutRecords
         Resource:
-          - { "Fn::GetAtt": ["TargetKinesis", "Arn"] }
+          - { "Fn::GetAtt": ["TargetKinesisStream", "Arn"] }
 
 resources:
   Resources:
